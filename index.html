@@ -59,16 +59,32 @@
 			{ display: "🐷", audio: "pig.m4a" },
 			{ display: "🐸", audio: "frog.m4a" },
 		];
+		const handleClickWithAudio = ev => {
+			var audio = new Audio(ev.target.dataset.audio);
+			audio.play();
+		};
+
+		// init mainEl
 		const mainEl = document.getElementById("main");
+		mainEl.dataset.audio = emojiList[0].audio;
+		mainEl.addEventListener("click", handleClickWithAudio);
+
 		const listEl = document.getElementById("selector");
+
 		emojiList.forEach(emoji => {
 			const emojiEl = document.createElement("div");
 			emojiEl.textContent = emoji.display;
-			emojiEl.addEventListener("click", () => {
+			emojiEl.dataset.audio = emoji.audio;
+			emojiEl.addEventListener("click", (ev) => {
+				// on emoji click, play the audio...
+				handleClickWithAudio(ev);
+				// ... and update mainEl text and audio
 				mainEl.textContent = emoji.display;
-				var audio = new Audio(emoji.audio);
-				audio.play();
+				mainEl.dataset.audio = emoji.audio;
+				mainEl.removeEventListener("click", handleClickWithAudio);
+				mainEl.addEventListener("click", handleClickWithAudio);
 			});
+
 			listEl.appendChild(emojiEl);
 		})
 	</script>
