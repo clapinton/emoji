@@ -32,17 +32,33 @@
 	</style>
 	<script>
 		const emojiList = [
-			{ display: "😃", audio: "goofy.m4a" },
-			{ display: "🤖", audio: "robot.m4a" },
-			{ display: "👍", audio: "joinha.m4a" },
-			{ display: "👨‍👩‍👦", audio: "family.m4a" },
-			{ display: "🐶", audio: "dog.m4a" },
-			{ display: "🐱", audio: "cat.m4a" },
-			{ display: "🐵", audio: "monkey.m4a" },
-			{ display: "🐴", audio: "horse.m4a" },
-			{ display: "🐷", audio: "pig.m4a" },
-			{ display: "🐸", audio: "frog.m4a" },
-		];
+			{ display: "😃", audio: "sounds/goofy.m4a" },
+			{ display: "🤖", audio: "sounds/robot.m4a" },
+			{ display: "👍", audio: "sounds/joinha.m4a" },
+			{ display: "👨‍👩‍👦", audio: "sounds/family.m4a" },
+			{ display: "🐶", audio: "sounds/dog.m4a" },
+			{ display: "🐱", audio: "sounds/cat.m4a" },
+			{ display: "🐵", audio: "sounds/monkey.m4a" },
+			{ display: "🐴", audio: "sounds/horse.m4a" },
+			{ display: "🐷", audio: "sounds/pig.m4a" },
+			{ display: "🐸", audio: "sounds/frog.m4a" },
+			{ display: "💩", audio: "sounds/poop.mf4" },
+			{ display: "🙌", audio: "sounds/highfive.mf4" },
+			{ display: "👅", audio: "sounds/tongue.mf4" },
+			{ display: "🐮", audio: "sounds/cow.mf4" },
+			{ display: "🦆", audio: "sounds/duck.mf4" },
+			{ display: "🐔", audio: "sounds/chicken.mf4" },
+			{ display: "🍌", audio: "sounds/banana.mf4" },
+			{ display: "🍎", audio: "sounds/apple.mf4" },
+			{ display: "🍓", audio: "sounds/strawberry.mf4" },
+			{ display: "🍉", audio: "sounds/watermelon.mf4" },
+			{ display: "🥑", audio: "sounds/avocado.mf4" },
+			{ display: "🍕", audio: "sounds/taco.mf4" },
+			{ display: "⚽️", audio: "sounds/goal.mf4" },
+			{ display: "💕", audio: "sounds/love.mf4" },
+			{ display: "🇧🇷", audio: "sounds/brazil.mf4" },
+			{ display: "🇺🇸", audio: "sounds/usa.mf4" } ,
+		].sort(() => Math.random() - 0.5);
 		const handleClickWithAudio = ev => {
 			var audio = new Audio(ev.target.dataset.audio);
 			audio.play();
