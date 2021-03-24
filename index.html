@@ -4,7 +4,11 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
 	</head>
 	<body>
-		<div id="selector"></div>
+		<div id="selector"
+			unselectable="on"
+			onselectstart="return false;"
+			onmousedown="return false;"
+		></div>
 	</body>
 	<style>
 		body {
@@ -28,6 +32,14 @@
 			background-color: #ecf0f15d;
 			border-radius: 40px;
 			border: solid 10px #bdc3c7;
+		}
+		.no-select {
+			-webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Safari */
+			-khtml-user-select: none; /* Konqueror HTML */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 		}
 	</style>
 	<script>
@@ -67,6 +79,7 @@
 
 		emojiList.forEach(emoji => {
 			const emojiEl = document.createElement("div");
+			emojiEl.classList.add("no-select");
 			emojiEl.textContent = emoji.display;
 			emojiEl.dataset.audio = emoji.audio;
 			emojiEl.addEventListener("click", handleClickWithAudio);
