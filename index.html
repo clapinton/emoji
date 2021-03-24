@@ -4,9 +4,6 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
 	</head>
 	<body>
-		<div id="main">
-			😃
-		</div>
 		<div id="selector"></div>
 	</body>
 	<style>
@@ -14,25 +11,12 @@
 			margin: 0;
 			background-color: #34495e;
 		}
-		#main {
-			font-size: 25vh;
-			width: 28vh;
-			height: 28vh;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin: 50px auto;
-			border: solid 10px #bdc3c7;
-			border-radius: 60px;
-		}
 		#selector {
 			font-size: 175px;
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
 			justify-content: space-around;
-			height: 57vh;
-			overflow: auto;
 		}
 		#selector div {
 			display: flex;
@@ -64,27 +48,13 @@
 			audio.play();
 		};
 
-		// init mainEl
-		const mainEl = document.getElementById("main");
-		mainEl.dataset.audio = emojiList[0].audio;
-		mainEl.addEventListener("click", handleClickWithAudio);
-
 		const listEl = document.getElementById("selector");
 
 		emojiList.forEach(emoji => {
 			const emojiEl = document.createElement("div");
 			emojiEl.textContent = emoji.display;
 			emojiEl.dataset.audio = emoji.audio;
-			emojiEl.addEventListener("click", (ev) => {
-				// on emoji click, play the audio...
-				handleClickWithAudio(ev);
-				// ... and update mainEl text and audio
-				mainEl.textContent = emoji.display;
-				mainEl.dataset.audio = emoji.audio;
-				mainEl.removeEventListener("click", handleClickWithAudio);
-				mainEl.addEventListener("click", handleClickWithAudio);
-			});
-
+			emojiEl.addEventListener("click", handleClickWithAudio);
 			listEl.appendChild(emojiEl);
 		})
 	</script>
