@@ -29,9 +29,11 @@
 			margin: 30px 0;
 			width: 230px;
 			height: 230px;
-			background-color: #ecf0f15d;
 			border-radius: 40px;
 			border: solid 10px #bdc3c7;
+		}
+		#selector .selected {
+			background-color: #ecf0f15d;
 		}
 		.no-select {
 			-webkit-touch-callout: none; /* iOS Safari */
@@ -72,6 +74,11 @@
 		].sort(() => Math.random() - 0.5);
 		const handleClickWithAudio = ev => {
 			var audio = new Audio(ev.target.dataset.audio);
+			const previouslySelected = document.getElementsByClassName("selected")[0];
+			if (previouslySelected) {
+				previouslySelected.classList.remove("selected");
+			}
+			ev.target.classList.add("selected");
 			audio.play();
 		};
 
