@@ -28,6 +28,26 @@
 			flex-wrap: wrap;
 			justify-content: space-around;
 		}
+
+		#selector.shuffling {
+			animation-duration: 0.5s;
+			animation-name: shuffling;
+		}
+		@keyframes shuffling {
+			0% {
+				transform: rotateY(0deg);
+			}
+			50% {
+				transform: rotateY(90deg);
+			}
+			51% {
+				transform: rotateY(-90deg);
+			}
+			100% {
+				transform: rotateY(0deg);
+			}
+		}
+
 		#selector div {
 			display: flex;
 			justify-content: center;
@@ -54,7 +74,6 @@
 			from {
 				background-color: #ecf0f15d;
 			}
-
 			to {
 				background-color: none;
 			}
@@ -69,6 +88,27 @@
 			box-shadow: rgba(0,0,0,0.5) 10px 10px;
 			margin-top: 100px
 		}
+
+		button.pressed {
+			animation-duration: 0.1s;
+			animation-name: buttonpress;
+			box-shadow: rgba(0,0,0,0.5) 0px 0px;
+			margin-top: 110px;
+			margin-left: 10px;
+		}
+		@keyframes buttonpress {
+			from {
+				box-shadow: rgba(0,0,0,0.5) 10px 10px;
+				margin-top: 100px;
+				margin-left: 0;
+			}
+			to {
+				box-shadow: rgba(0,0,0,0.5) 0px 0px;
+				margin-top: 110px;
+				margin-left: 10px;
+			}
+		}
+
 	</style>
 	<script>
 		const emojiList = [
@@ -113,6 +153,18 @@
 
 		const mainEl = document.getElementById("selector");
 
+		document.addEventListener("touchstart", (ev) => {
+			if (ev.target.tagName === "BUTTON") {
+				ev.target.classList.add("pressed");
+			}
+		});
+
+		document.addEventListener("touchend", (ev) => {
+			if (ev.target.tagName === "BUTTON") {
+				ev.target.classList.remove("pressed");
+			}
+		});
+
 		const shuffleEmoji = () => {
 			const randomIndex = Math.floor(Math.random() * (emojiList.length-1));
 			const emoji = emojiList[randomIndex];
@@ -121,8 +173,15 @@
 			emojiEl.textContent = emoji.display;
 			emojiEl.dataset.audio = emoji.audio;
 			emojiEl.addEventListener("click", handleClickWithAudio);
-			mainEl.innerHTML = "";
-			mainEl.appendChild(emojiEl);
+			setTimeout(() => {
+				mainEl.innerHTML = "";
+				mainEl.appendChild(emojiEl);
+			}, 200);
+
+			mainEl.classList.add("shuffling");
+			setTimeout(() => {
+				mainEl.classList.remove("shuffling");
+			}, 500);
 		};
 		shuffleEmoji();
 	</script>
