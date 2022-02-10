@@ -1,0 +1,129 @@
+<html>
+	<head>
+		<title>Emoji!!</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
+	</head>
+	<body>
+		<div id="selector"
+			unselectable="on"
+			onselectstart="return false;"
+			onmousedown="return false;"
+		></div>
+		<button onClick="shuffleEmoji()">SHUFFLE</button>
+	</body>
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+			background-color: #34495e;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: center;
+		}
+		#selector {
+			font-size: 350px;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-around;
+		}
+		#selector div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 30px 0;
+			width: 460px;
+			height: 460px;
+			border-radius: 40px;
+			border: solid 10px #bdc3c7;
+		}
+		#selector .selected {
+			animation-duration: 0.5s;
+			animation-name: fadeout;
+		}
+		.no-select {
+			-webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Safari */
+			-khtml-user-select: none; /* Konqueror HTML */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+		}
+		@keyframes fadeout {
+			from {
+				background-color: #ecf0f15d;
+			}
+
+			to {
+				background-color: none;
+			}
+		}
+		button {
+			width: 460px;
+			height: 200px;
+			background: #2ecc71;
+			color: white;
+			font-size: 50px;
+			border-radius: 20px;
+			box-shadow: rgba(0,0,0,0.5) 10px 10px;
+			margin-top: 100px
+		}
+	</style>
+	<script>
+		const emojiList = [
+			{ display: "😃", audio: "sounds/goofy.m4a" },
+			{ display: "🤖", audio: "sounds/robot.m4a" },
+			{ display: "👍", audio: "sounds/joinha.m4a" },
+			{ display: "👨‍👩‍👦", audio: "sounds/family.m4a" },
+			{ display: "🐶", audio: "sounds/dog.m4a" },
+			{ display: "🐱", audio: "sounds/cat.m4a" },
+			{ display: "🐵", audio: "sounds/monkey.m4a" },
+			{ display: "🐴", audio: "sounds/horse.m4a" },
+			{ display: "🐷", audio: "sounds/pig.m4a" },
+			{ display: "🐸", audio: "sounds/frog.m4a" },
+			{ display: "💩", audio: "sounds/poop.m4a" },
+			{ display: "🙌", audio: "sounds/highfive.m4a" },
+			{ display: "👅", audio: "sounds/tongue.m4a" },
+			{ display: "🐮", audio: "sounds/cow.m4a" },
+			{ display: "🦆", audio: "sounds/duck.m4a" },
+			{ display: "🐔", audio: "sounds/chicken.m4a" },
+			{ display: "🍌", audio: "sounds/banana.m4a" },
+			{ display: "🍎", audio: "sounds/apple.m4a" },
+			{ display: "🍓", audio: "sounds/strawberry.m4a" },
+			{ display: "🍉", audio: "sounds/watermelon.m4a" },
+			{ display: "🥑", audio: "sounds/avocado.m4a" },
+			{ display: "⚽️", audio: "sounds/goal.m4a" },
+			{ display: "💕", audio: "sounds/love.m4a" },
+			{ display: "🇧🇷", audio: "sounds/brazil.m4a" },
+			{ display: "🇺🇸", audio: "sounds/usa.m4a" } ,
+		];
+		const handleClickWithAudio = ev => {
+			var audio = new Audio(ev.target.dataset.audio);
+			const previouslySelected = document.getElementsByClassName("selected")[0];
+			if (previouslySelected) {
+				previouslySelected.classList.remove("selected");
+			}
+			ev.target.classList.add("selected");
+			audio.play();
+			setTimeout(() => {
+				ev.target.classList.remove("selected");
+			}, 500);
+		};
+
+		const mainEl = document.getElementById("selector");
+
+		const shuffleEmoji = () => {
+			const randomIndex = Math.floor(Math.random() * (emojiList.length-1));
+			const emoji = emojiList[randomIndex];
+			const emojiEl = document.createElement("div");
+			// emojiEl.classList.add("no-select");
+			emojiEl.textContent = emoji.display;
+			emojiEl.dataset.audio = emoji.audio;
+			emojiEl.addEventListener("click", handleClickWithAudio);
+			mainEl.innerHTML = "";
+			mainEl.appendChild(emojiEl);
+		};
+		shuffleEmoji();
+	</script>
+</html>
